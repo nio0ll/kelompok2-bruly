@@ -1,0 +1,7 @@
+
+0123456789 | zaraseva | RPL
+Nilai MTK	: 80
+Nilai B.IND	: 89
+Nilai B.ING	: 90
+Nilai IPA	: 98
+Nilai Akhir	: 97.2

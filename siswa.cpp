@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 using namespace std;
 
 
@@ -78,7 +79,51 @@ void adddata(siswa data[], int n){
 void outputdata(){}
 
 //searching data berdasarkan nisn
-void searchdata(){}
+void searchdata(){
+    ifstream fileInput("zaraseva.txt");
+    if(fileInput.is_open()){
+        siswa cari;
+        string carinisn, teks;
+        bool ketemu = false;
+        cout << "input NISN yang dicari: ";
+        cin >> carinisn;
+        while (fileInput >> cari.nisn) {
+            //getline(fileInput, cari.nisn, '|');
+            fileInput.ignore(1000, '|');
+            fileInput.ignore();
+            getline(fileInput, cari.nama, '|'); 
+            fileInput.ignore();
+            getline(fileInput, cari.jurusan); 
+            
+            fileInput >> teks >> teks >> teks >> cari.nilai.mtk 
+                      >> teks >> teks >> teks >> cari.nilai.bin
+                      >> teks >> teks >> teks >> cari.nilai.bing 
+                      >> teks >> teks >> teks >> cari.nilai.ipa
+                      >> teks >> teks >> teks >> cari.nilai.akhir;
+            fileInput.ignore(); 
+
+            if(cari.nisn == carinisn) {
+                cout << "\nData Ditemukan!";
+                cout << "\nNISN\t: " << cari.nisn
+                     << "\nNama\t: " << cari.nama
+                     << "\nJurusan\t: " << cari.jurusan
+                     << "\nNilai MTK\t: " << cari.nilai.mtk
+                     << "\nNilai B.IND\t: " << cari.nilai.bin
+                     << "\nNilai B.ING\t: " << cari.nilai.bing
+                     << "\nNilai IPA\t: " << cari.nilai.ipa
+                     << "\nNilai Akhir\t: " << cari.nilai.akhir << endl;
+                ketemu = true;
+                break;
+            }
+        }
+        if(!ketemu) cout << "data " << carinisn << " tidak ditemukan.\n";
+        cout << "file berhasil dibuka!\n";
+        fileInput.close();
+    }
+    else{
+        cout<<"file gagal dibuka!\n";
+    }
+}
 
 //menampilkan data berdasarkan rankingnya
 void rank(){}
@@ -87,7 +132,7 @@ int main (){
     int n, menu;
     siswa data[100];
     do{
-        cout << "MENU\n1. tambah data siswa \n2. daftar data siswa\n3. ranking \n4. cari nisn \n5. keluar"
+        cout << "\nMENU\n1. tambah data siswa \n2. daftar data siswa\n3. ranking \n4. cari nisn \n5. keluar"
              << "\ninput MENU: ";
         cin >> menu; 
         if (menu==1){
@@ -97,7 +142,9 @@ int main (){
             outputdata();
         }
         if (menu==3){}
-        if (menu==4){}
+        if (menu==4){
+            searchdata();
+        }
     } while (menu!=5);
 
     return 0;
