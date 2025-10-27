@@ -84,9 +84,21 @@ void searchdata(){}
 void rank(){}
 
 int main (){
-    int n=0, i;
+    int n, menu;
     siswa data[100];
-    adddata(data, n);
+    do{
+        cout << "MENU\n1. tambah data siswa \n2. daftar data siswa\n3. ranking \n4. cari nisn \n5. keluar"
+             << "\ninput MENU: ";
+        cin >> menu; 
+        if (menu==1){
+            adddata(data, n);
+        }
+        if (menu==2){
+            outputdata();
+        }
+        if (menu==3){}
+        if (menu==4){}
+    } while (menu!=5);
 
     return 0;
 }
