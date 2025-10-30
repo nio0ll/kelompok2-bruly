@@ -75,8 +75,22 @@ void adddata(siswa data[], int n){
         
 }
 
-//membaca data dari file dan di tampilkan
-void outputdata(){}
+//membaca data dari file dan di tampilkann
+void outputdata(){
+    ifstream fileInput("zaraseva.txt");
+    if (fileInput.is_open()) {
+        string line;
+        cout << "\n DAFTAR DATA SISWA \n";
+        while (getline(fileInput, line)) {
+            cout << line << endl;
+        }
+        cout << "\n file berhasil dibaca \n";
+        fileInput.close();
+    }
+    else {
+        cout << "file gagal dibuka" << endl;
+    }
+}
 
 //searching data berdasarkan nisn
 void searchdata(){
@@ -126,23 +140,97 @@ void searchdata(){
 }
 
 //menampilkan data berdasarkan rankingnya
-void rank(){}
+void ranking() {
+    ifstream fileInput ("zaraseva.txt");
+    if (!fileInput.is_open()) {
+        cout << "file gagal dibuka" << endl;
+        return;
+    }
+
+    siswa data [100];
+    int n=0;
+    string line;
+    
+    //baca data
+    while (getline(fileInput, line)) {
+        if (line.empty()) continue;
+
+        //ambil data
+        size_t pos1 = line.find ("|");
+        size_t pos2 = line.find ("|", pos1 + 3);
+        if (pos1 == string ::npos || pos2 == string::npos) continue;
+
+        data[n].nisn =line.substr(0, pos1);
+        data[n].nama = line.substr (pos1 + 3, pos2 - (pos1 + 3));
+        data[n].jurusan = line.substr(pos2 + 3);
+
+        //baca 5 nilai
+        getline(fileInput, line);
+        data[n].nilai.mtk = stof(line.substr(line.find(":") + 1));
+        getline(fileInput, line);
+        data[n].nilai.bin = stof(line.substr(line.find(":") + 1));
+        getline(fileInput, line);
+        data[n].nilai.bing = stof(line.substr(line.find(":") + 1));
+        getline(fileInput, line);
+        data[n].nilai.ipa = stof(line.substr(line.find(":") + 1));
+        getline(fileInput, line);
+        data[n].nilai.akhir = stof(line.substr(line.find(":") + 1));
+        n++;
+    }
+
+    fileInput.close();
+
+    if (n == 0) {
+        cout << "tidak ada";
+        return;
+    }
+
+    //urutan data (bubble sort descending)
+    for (int i=0; i<n-1; i++) {
+        for (int j=0; j<n-i-1; j++) {
+            if (data[j].nilai.akhir < data[j+1].nilai.akhir) {
+                siswa T = data[j];
+                data[j] = data[j + 1];
+                data [j + 1] = T;
+            }
+        }
+    }
+
+    //tampil rank
+    cout << "\n DATA BERDASARKAN RANKING \n";
+    for (int i=0; i<n; i++) {
+        cout << "Ranking ke-" << i+1 << endl;
+        cout << "NISN\t : " << data[i].nisn << endl;
+        cout << "Nama\t : " << data[i].nama << endl;
+        cout << "Jurusan\t : " << data[i].jurusan << endl;
+        cout << "Nilai akhir\t : " << data[i].nilai.akhir << endl;
+    }
+}
 
 int main (){
     int n, menu;
     siswa data[100];
     do{
-        cout << "\nMENU\n1. tambah data siswa \n2. daftar data siswa\n3. ranking \n4. cari nisn \n5. keluar"
+        cout << "\nPROGRAM DATA SISWA\n1. tambah data siswa \n2. daftar data siswa\n3. ranking \n4. cari nisn \n5. keluar"
              << "\ninput MENU: ";
         cin >> menu; 
+
+        cin.ignore();
+
         if (menu==1){
+            cout << "\ntambah data siswa\n";
             adddata(data, n);
         }
         if (menu==2){
+            cout << "\ndaftar data siswa\n";
             outputdata();
         }
-        if (menu==3){}
+        if (menu==3){
+            cout << "\ncari data siswa\n";
+            ranking();
+        }
         if (menu==4){
+            cout << "\ncari data siswa\n";
             searchdata();
         }
     } while (menu!=5);

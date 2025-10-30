@@ -5,3 +5,17 @@ Nilai B.IND	: 89
 Nilai B.ING	: 90
 Nilai IPA	: 98
 Nilai Akhir	: 97.2
+
+02065461833 | kiloo | tki
+Nilai MTK	: 85
+Nilai B.IND	: 90
+Nilai B.ING	: 65
+Nilai IPA	: 84
+Nilai Akhir	: 90.2
+
+3265965696 | poli | tki
+Nilai MTK	: 65
+Nilai B.IND	: 84
+Nilai B.ING	: 78
+Nilai IPA	: 90
+Nilai Akhir	: 85.4
