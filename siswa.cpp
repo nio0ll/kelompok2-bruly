@@ -157,12 +157,12 @@ void ranking() {
 
         //ambil data
         size_t pos1 = line.find ("|");
-        size_t pos2 = line.find ("|", pos1 + 3);
+        size_t pos2 = line.find ("|", pos1 + 2);
         if (pos1 == string ::npos || pos2 == string::npos) continue;
 
         data[n].nisn =line.substr(0, pos1);
-        data[n].nama = line.substr (pos1 + 3, pos2 - (pos1 + 3));
-        data[n].jurusan = line.substr(pos2 + 3);
+        data[n].nama = line.substr (pos1 + 2, pos2 - (pos1 + 2));
+        data[n].jurusan = line.substr(pos2 + 2);
 
         //baca 5 nilai
         getline(fileInput, line);
